@@ -5,8 +5,8 @@ pipeline{
         stage("testingInstall"){
             steps{
                 sh 'echo "installing docker locally"'
-                sh 'chmod 775 ./script/*'
-                sh './script/before_installation.sh'
+                sh 'chmod 775 ./scripts/*'
+                sh './scripts/before_installation.sh'
             }
         }
         stage("testing docker swarm"){
