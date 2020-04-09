@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
-import os, random, requests
-import json
+import os, random, requests, json
 
 
 app = Flask(__name__)
@@ -75,6 +74,9 @@ def home():
         mit = ("<br>").join(mit.split("\n"))
         return render_template("index.html", sentence = mit, title="read")
     return render_template("index.html", sentence = "Hello, Welcome to the site!! Choose your theme and be surprised", title="read")
+
+
+
 
 if __name__ == "__main__":
     app.run(port=5000, host='0.0.0.0')
