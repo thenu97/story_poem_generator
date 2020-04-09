@@ -1,0 +1,62 @@
+version: '3.7'
+
+
+networks:
+  swarm:
+    driver: overlay
+
+
+services:
+  service_1:
+    image: thenu97/home
+    ports:
+      - 5000:5000
+    env_file:
+      - ./.env
+    restart: always
+    networks:
+      - swarm
+    deploy:
+      replicas: 2
+
+
+  service_2:
+    image: thenu97/story
+    restart: always
+    networks:
+      - swarm
+    deploy:
+      replicas: 2
+
+
+  service_3:
+    image: thenu97/char
+    restart: always
+    networks:
+      - swarm
+    deploy:
+      replicas: 2
+
+
+  service_4:
+    image: thenu97/storchar
+    restart: always
+    networks:
+      - swarm
+    deploy:
+      replicas: 2
+
+
+  service_nginx:
+    image: thenu97/nginx:1
+    ports:
+      - 80:80
+    networks:
+      - swarm
+    depends_on:
+      - service_1
+      - service_2
+      - service_3
+      - service_4
+    deploy:
+      replicas: 1
