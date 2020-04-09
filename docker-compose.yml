@@ -8,12 +8,11 @@ networks:
 
 services:
   service_1:
-    image: thenu97/home
+    image: thenu97/home:latest
     ports:
       - 5000:5000
     env_file:
       - ./.env
-    restart: always
     networks:
       - swarm
     deploy:
@@ -21,8 +20,7 @@ services:
 
 
   service_2:
-    image: thenu97/story
-    restart: always
+    image: thenu97/story:latest
     networks:
       - swarm
     deploy:
@@ -30,8 +28,7 @@ services:
 
 
   service_3:
-    image: thenu97/char
-    restart: always
+    image: thenu97/char:latest
     networks:
       - swarm
     deploy:
@@ -39,8 +36,7 @@ services:
 
 
   service_4:
-    image: thenu97/storchar
-    restart: always
+    image: thenu97/storchar:latest
     networks:
       - swarm
     deploy:
