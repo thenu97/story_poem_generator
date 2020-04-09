@@ -5,19 +5,8 @@ pipeline{
         stage("testingInstall"){
             steps{
                 sh 'echo "installing docker locally"'
-                sh 'sudo apt-get remove docker docker-engine docker.io -y'
-                sh 'sudo apt update -y'
-                sh 'sudo apt-get install apt-transport-https'
-                sh 'sudo apt-get install ca-certificates'
-                sh 'sudo apt-get install curl'
-                sh 'sudo apt-get install gnupg-agent'
-                sh 'sudo apt-get install software-properties-common'
-                sh 'sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -'
-                sh 'sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"'
-                sh 'sudo apt-get install docker-ce docker-ce-cli containerd.io'
-                sh 'sudo systemctl start docker'
-                sh 'sudo systemctl enable docker'
-                sh 'sudo systemctl status docker'
+                sh 'chmod 775 ./script/*'
+                sh './script/before_installation.sh'
             }
         }
         stage("testing docker swarm"){
