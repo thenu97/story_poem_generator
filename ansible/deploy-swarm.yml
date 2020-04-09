@@ -5,4 +5,4 @@
     - name: deploy as stack
       command: docker stack deploy --compose-file docker-compose.yml stackdemo
       args:
-        chdir: story_poem_generator
+        chdir: manager/story_poem_generator
