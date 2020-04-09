@@ -1,7 +1,6 @@
-import urllib3, flask, pytest, requests
+import urllib3, flask, pytest, requests, os
 from flask_mysqldb import MySQL
 from flask import Flask
-import os
 from app import home
 
 app = Flask(__name__)
