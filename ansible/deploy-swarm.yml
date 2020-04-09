@@ -5,4 +5,4 @@
     - name: deploy as stack
       command: docker stack deploy --compose-file docker-compose.yml stackdemo
       args:
-        chdir: SFIA-2
+        chdir: story_poem_generator
