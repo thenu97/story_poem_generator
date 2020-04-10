@@ -2,7 +2,7 @@
 ---
 # Poem & Story Generator
 
-This is for the second project due Week 9 of the DevOps February 17 2020 intake cohort.
+This is for the second project set by QA
 
 ## Table of Contents
 
