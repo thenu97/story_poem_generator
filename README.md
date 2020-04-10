@@ -2,7 +2,7 @@
 ---
 # Poem & Story Generator
 
-Written in reference to QAC - Fundamental Project Specification (DevOps Core) . This second project is for the purpose of fulfilling the specification definition for the project assignment due Week 9 of the DevOps February 17 2020 intake cohort.
+This is for the second project due Week 9 of the DevOps February 17 2020 intake cohort.
 
 ## Table of Contents
 
@@ -27,7 +27,7 @@ Written in reference to QAC - Fundamental Project Specification (DevOps Core) . 
 7. [Deployment](#deployment)
     + [Toolset](#toolset)
 8. [Improvements for Future](#improvements-for-future)
-+ [Author](#authors)
+9. [Author](#authors)
 
 ## Project Brief
 
@@ -39,16 +39,19 @@ My proposal focuses on the creation of a website for poetry and story genertor b
 
 ### Wireframes
 
-![A picture of my initial idea](images/wireframe(1).JPG | width=48)
+<img width="500" alt="portfolio_view" src="https://i.imgur.com/PUFseOa.jpg" title="source: imgur.com" />
 
-![First change made](images/wireframe(2).JPG)
+My initial idea was to have a simple button so when the user pressed it, it displayed a story of a random theme with random character names substituted in it. In other words, service two picks out a theme at a random from a list of three and service three picks out a male and female character name from a list of fourteen, for which service four puts it all together and sends it back to service one. 
 
-Initial idea was to have service two choose a story based on the theme user selected and service three attain character names from user, and have them send it over to service four, which will send a story with the character names substituted in place.
+<img width="500" alt="portfolio_view" src="https://i.imgur.com/hHp9W7x.jpg" title="source: imgur.com" />
 
-![Final layout for story](images/finalwire(story).JPG)
-![Final layout for poem](images/finalwire(poem).JPG)
+To make it more user friendly/interactive, I changed it so that the user gets to choose the theme and character name they want by adding user input. This shortened the character name lsit to three from fourteen. 
 
-Final idea was have service one store the literacy pieces and service two and three generate randomised information to insert into them. Service four then gets to decide whether it is a story or a poem based on user's choice. 
+<img width="500" alt="portfolio_view" src="https://i.imgur.com/WJTj9tO.jpg" title="source: imgur.com" />
+
+<img width="500" alt="portfolio_view" src="https://i.imgur.com/IACN03Z.jpg" title="source: imgur.com" />
+
+In the end, instead of having service four take a lot in with sending a whole story over to service one, I thought I could just store the literacy pieces in service one and have service four just choose between poem and story depending on service two and three. 
 
 
 ## Asana Board
@@ -59,11 +62,11 @@ Due to this setup sprints could be passed through development, and, if required,
 
 ### Start Point
 
-![Product Backlog](images/jointreq.jpg =) ![Sprint Backlog](images/spintbacklog.JPG)
+<img src="https://i.imgur.com/fMVWd2r.jpg" title="source: imgur.com" /> <img src="https://i.imgur.com/stOZ67u.jpg" title="source: imgur.com" />
 
-![User Story Before](images/usrstrbef.JPG) 
+<img src="https://i.imgur.com/3OQBSDR.jpg" title="source: imgur.com" />
 
-![Sprint One](images/sprint(1).png)
+<img src="https://i.imgur.com/Iblbwox.png" title="source: imgur.com" />
 
 At the start of the project, I focussed on the five tasks most easily completable in the first week of training: Starting the Kanban board [itself](https://app.asana.com/0/1169906447683321/board), starting this documentation, instituting a github repository for the project, which can be found [here](https://github.com/thenu97/SFIA-PROJECT2-QA), initialising the risk assessment for the project in line with my initial understanding, and researching Docker covered in lesson as we went along.
 
@@ -165,6 +168,8 @@ The user presses a button that generates a random story. As the user only intera
 
 ## Improvements for Future Versions
 
-#### Authors
+
+
+## Authors
 
 Thenuja Viknarajah
