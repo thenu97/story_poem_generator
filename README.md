@@ -39,17 +39,17 @@ My proposal focuses on the creation of a website for poetry and story genertor b
 
 ### Wireframes
 
-<img width="500" alt="portfolio_view" src="https://i.imgur.com/PUFseOa.jpg" title="source: imgur.com" />
+<img width="500" alt="portfolio_view" src="https://i.imgur.com/PUFseOa.jpg" title="wireframe1" />
 
 My initial idea was to have a simple button so when the user pressed it, it displayed a story of a random theme with random character names substituted in it. In other words, service two picks out a theme at a random from a list of three and service three picks out a male and female character name from a list of fourteen, for which service four puts it all together and sends it back to service one. 
 
-<img width="500" alt="portfolio_view" src="https://i.imgur.com/hHp9W7x.jpg" title="source: imgur.com" />
+<img width="500" alt="portfolio_view" src="https://i.imgur.com/hHp9W7x.jpg" title="wireframe2" />
 
 To make it more user friendly/interactive, I changed it so that the user gets to choose the theme and character name they want by adding user input. This shortened the character name lsit to three from fourteen. 
 
-<img width="500" alt="portfolio_view" src="https://i.imgur.com/WJTj9tO.jpg" title="source: imgur.com" />
+<img width="500" alt="portfolio_view" src="https://i.imgur.com/WJTj9tO.jpg" title="wireframe3.1" />
 
-<img width="500" alt="portfolio_view" src="https://i.imgur.com/IACN03Z.jpg" title="source: imgur.com" />
+<img width="500" alt="portfolio_view" src="https://i.imgur.com/IACN03Z.jpg" title="wireframe3.2" />
 
 In the end, instead of having service four take a lot in with sending a whole story over to service one, I thought I could just store the literacy pieces in service one and have service four just choose between poem and story depending on service two and three. 
 
@@ -62,11 +62,9 @@ Due to this setup sprints could be passed through development, and, if required,
 
 ### Start Point
 
-<img src="https://i.imgur.com/fMVWd2r.jpg" title="source: imgur.com" /> <img src="https://i.imgur.com/stOZ67u.jpg" title="source: imgur.com" />
+<img width="100" src="https://i.imgur.com/fMVWd2r.jpg" title="product backlog" /> <img width="100" src="https://i.imgur.com/stOZ67u.jpg" title="sprint backlog" /> <img width="100" src="https://i.imgur.com/3OQBSDR.jpg" title="user stories" />
 
-<img src="https://i.imgur.com/3OQBSDR.jpg" title="source: imgur.com" />
-
-<img src="https://i.imgur.com/Iblbwox.png" title="source: imgur.com" />
+<img src="https://i.imgur.com/Iblbwox.png" title="sprint1" />
 
 At the start of the project, I focussed on the five tasks most easily completable in the first week of training: Starting the Kanban board [itself](https://app.asana.com/0/1169906447683321/board), starting this documentation, instituting a github repository for the project, which can be found [here](https://github.com/thenu97/SFIA-PROJECT2-QA), initialising the risk assessment for the project in line with my initial understanding, and researching Docker covered in lesson as we went along.
 
