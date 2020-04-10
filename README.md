@@ -45,7 +45,7 @@ My initial idea was to have a simple button so when the user pressed it, it disp
 
 <img width="500" alt="portfolio_view" src="https://i.imgur.com/hHp9W7x.jpg" title="wireframe2" />
 
-To make it more user friendly/interactive, I changed it so that the user gets to choose the theme and character name they want by adding user input. This shortened the character name lsit to three from fourteen. 
+To make it more user friendly/interactive, I changed it so that the user gets to choose the theme and character name they want by adding user input. This shortened the character name list to three from fourteen. 
 
 <img width="500" alt="portfolio_view" src="https://i.imgur.com/WJTj9tO.jpg" title="wireframe3.1" />
 
@@ -68,47 +68,42 @@ Due to this setup sprints could be passed through development, and, if required,
 
 <img src="https://i.imgur.com/Iblbwox.png" title="sprint1" />
 
-At the start of the project, I focussed on the five tasks most easily completable in the first week of training: Starting the Kanban board [itself](https://app.asana.com/0/1169906447683321/board), starting this documentation, instituting a github repository for the project, which can be found [here](https://github.com/thenu97/SFIA-PROJECT2-QA), initialising the risk assessment for the project in line with my initial understanding, and researching Docker covered in lesson as we went along.
+At the start of the project, I focused on the five tasks most easily completable in the first week of training: Starting the Kanban board [itself](https://app.asana.com/0/1169906447683321/board), starting this documentation, instituting a github repository for the project, which can be found [here](https://github.com/thenu97/story_poem_generator), initialising the risk assessment for the project in line with my initial understanding, and researching Docker covered in lesson as we went along.
 
 ### Rolling Changes
 
-![User Story After](images/usrstraft.JPG)
+<img width="250" src="https://i.imgur.com/GBpdnDx.jpg" title="user stories (after)" />
 
 + The first major change to the Kanban board to changing my idea from a user pressing a button to selecting data; theme and character names. This meant I had to change my html code and find a way to communicate the user input to service two and three. Then communicate this info to service four at the same time. I spent most of my time researching flask before_requests and after_requests, and using global variables to store data coming in at different times. 
 
-![Sprint Two](images/sprint(2.1).png) 
+<img width="250" src="https://i.imgur.com/DLZWEeR.png" title="sprint2.1" />
 
 + As I was using global variables to solve my issue of post requests coming in at different times, I was faced with another issue when replicating the container for docker swarm. The global variables were container specific so when I was replicating it, the global variables reset to empty. To solve this, I had three options: to replicate the services utilising global variables once and document the issue, research into docker volumes and see if there's a way of replicating the containers based on the volumes of the original container, or re-design my entire application to ensure it wasn't using global variables at all. In the end, I went with the third option and gave myself a day to re-design the application and if it wasn't completed within that time-frame to result in the first resolution. 
 
-![Sprint Two Continued](images/sprint(2.2).png)
+<img width="250" src="https://i.imgur.com/iYD7Tcx.png" title="sprint2.2" />
 
 + Reaching the end of week two, I had an application that didn't use global variables and had also found a way to programme Ansible to set the environment (downloading docker) assign worker/manager nodes without having to ssh into each virtual machine and manually doing it ourselves. I also researched into what I had to do for testing so added that onto to Yet to start on the kanban board. 
 
 + I started researching into testing such as SonarQube (static testing tool) and Selenium (dynamic testing tool).
 
-![Final Sprint](images/sprint(3).png)
+<img src="https://i.imgur.com/SJngIqb.jpg" title="sprint3" />
 
-+ Testing commentary awaits...
++ SonarQube was not a requirement to implement so that became a dropped idea. 
 
 ### End Point
-![Everything done](images/sprint(4).png)
+<img src="https://i.imgur.com/Zqspd1D.png" title="ending" />
 
 
 ## Risk Assessment
 
 |Risk No.|Risk|Effect|Likelihood|Serverity|Importance|Mitigate|
 |---|---|---|---|---|---|---|
-|1|Not understanding the brief given.|Failed project|2|5|10|Ask as many questions as possible, research, re-read.|
-|2|Problems with developing 4 services.|Failed project as this is a needed requirement|3|5|15|Do more research into mircoservices and how systems involved work together.|
-|3|Overrunning on GCP free data limits.|An instance is left running, or an account breach enables the resources on the account to be drained.|1|5|5|Continue monitoring GCP usage. Copy databases offline as final backup.|
-|4|Problems with Python/Flask|Failed project as this is needed for the front end and backend of my application.|1|5|5|Practise Python through continuous challenges on Codewars.|
-|5|Problems with Jenkins|Not being able to CI/CD|2|5|10|Do more research into using Jenkins with Docker Swarm.|
-|6|Using Ansible Playbook|The project requires this but due to not using ansible before, this holds a great risk.|3|5|15|Study how Ansible is used through documentation provided and asked my trainer for resources.|
-|7|Docker|Required by the project but I haven't used this tool before so it holds high risks.|4|5|20|Research and docker documentation.|
-
-![Risk Matrix](images/riskmatrix.png)
-
-To be commented on later... 
+|1|Problems with developing 4 services.|Failed project as this is a needed requirement|3|5|15|Do more research into mircoservices and how systems involved work together.|
+|2|Overrunning on GCP free data limits.|An instance is left running, or an account breach enables the resources on the account to be drained.|1|5|5|Continue monitoring GCP usage. Copy databases offline as final backup.|
+|3|Problems with Python/Flask|Failed project as this is needed for the front end and backend of my application.|1|5|5|Practise Python through continuous challenges on Codewars.|
+|4|Problems with Jenkins|Not being able to CI/CD|2|5|10|Do more research into using Jenkins with Docker Swarm.|
+|5|Using Ansible Playbook|The project requires this but due to not using ansible before, this holds a great risk.|3|5|15|Study how Ansible is used through documentation provided and asked my trainer for resources.|
+|6|Docker|Required by the project but I haven't used this tool before so it holds high risks.|4|5|20|Research and docker documentation.|
 
 
 |Risk No.|Risk|Solution|
@@ -120,17 +115,21 @@ To be commented on later...
 |5|Jenkins automated build|I researched into how Docker Swarm tied in with Jenkins and drew a pipeline that help me grasp the idea better.|
 |6|Ansible - worker nodes|Researched into it and I was eventually able to support my colleagues with a solution that managed docker clusters.|
 |7|Docker Swarm|Docker wasn't as hard as I expected to understand. Continuous practise helped a lot.|
+|8|GCP service was throwing errors when running website|Recorded the deployment process so I can demonstrate it during presentation.|
+
+<img width="500" src="https://i.imgur.com/LAL1f7i.png" title="risk matrix" />
 
 
 ## Project Architecture
 
 ### Overall Architecture
 
-![Overall](images/pipeline(num).JPG)
+<img src="https://i.imgur.com/i3cK01G.jpg" title="deployment process" />
 
 At stage one, once the code is changed on visual studios, you push it up to GitHub. This initiates an automated Jenkins build at stage two. Jenkins then ensures ansible is started up at stage three. Ansible then pushes the new built image to Docker registry (Docker Hub). Ansible also assigns worker/manager nodes at stage four. At stage five, the manager node pulls down the image from Docker Hub and creates multiple containers (defined in docker-compose file) then deploys it to the worker nodes that are assigned to it. In my case, only one worker node was created. 
 
-![Communication](images/architecture.JPG)
+<img width="500" src="https://i.imgur.com/OJC4HRc.jpg" title="communication" />
+
 The user presses a button that generates a random story. As the user only interacts and sees service one, HTML post and get requests were used to share information between the services. When we containerised our applications, we linked the containers by creating a docker network and allowing the connection to flow the same way as before. 
 
 ### Issues Encountered
