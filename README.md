@@ -62,7 +62,8 @@ Due to this setup sprints could be passed through development, and, if required,
 
 ### Start Point
 
-<img width="200" src="https://i.imgur.com/fMVWd2r.jpg" title="product backlog" /> <img width="250" src="https://i.imgur.com/KQNZeaX.jpg" title="moscow key" /> <img width="200" src="https://i.imgur.com/stOZ67u.jpg" title="sprint backlog" /> <img width="200" src="https://i.imgur.com/3OQBSDR.jpg" title="user stories" /> 
+<img width="250" src="https://i.imgur.com/KQNZeaX.jpg" title="moscow key" /> 
+<img width="200" src="https://i.imgur.com/fMVWd2r.jpg" title="product backlog" /> <img width="200" src="https://i.imgur.com/stOZ67u.jpg" title="sprint backlog" /> <img width="200" src="https://i.imgur.com/3OQBSDR.jpg" title="user stories" /> 
 
 <img src="https://i.imgur.com/Iblbwox.png" title="sprint1" />
 
