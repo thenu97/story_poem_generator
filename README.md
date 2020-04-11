@@ -39,19 +39,13 @@ My proposal focuses on the creation of a website for poetry and story genertor b
 
 ### Wireframes
 
-<img width="500" alt="portfolio_view" src="https://i.imgur.com/PUFseOa.jpg" title="wireframe1" />
+<img src="https://i.imgur.com/pWyR2jp.png" title="wireframes" />
 
-My initial idea was to have a simple button so when the user pressed it, it displayed a story of a random theme with random character names substituted in it. In other words, service two picks out a theme at a random from a list of three and service three picks out a male and female character name from a list of fourteen, for which service four puts it all together and sends it back to service one. 
++ My initial idea was to have a simple button so when the user pressed it, it displayed a story of a random theme with random character names substituted in it. In other words, service two picks out a theme at a random from a list of three and service three picks out a male and female character name from a list of fourteen, for which service four puts it all together and sends it back to service one. 
 
-<img width="500" alt="portfolio_view" src="https://i.imgur.com/hHp9W7x.jpg" title="wireframe2" />
++ To make it more user friendly/interactive, I changed it so that the user gets to choose the theme and character name they want by adding user input. This shortened the character name list to three from fourteen. 
 
-To make it more user friendly/interactive, I changed it so that the user gets to choose the theme and character name they want by adding user input. This shortened the character name list to three from fourteen. 
-
-<img width="500" alt="portfolio_view" src="https://i.imgur.com/WJTj9tO.jpg" title="wireframe3.1" />
-
-<img width="500" alt="portfolio_view" src="https://i.imgur.com/IACN03Z.jpg" title="wireframe3.2" />
-
-In the end, instead of having service four take a lot in with sending a whole story over to service one, I thought I could just store the literacy pieces in service one and have service four just choose between poem and story depending on service two and three. 
++ In the end, instead of having service four take a lot in with sending a whole story over to service one, I thought I could just store the literacy pieces in service one and have service four just choose between poem and story depending on service two and three. 
 
 
 ## Asana Board
@@ -72,25 +66,16 @@ At the start of the project, I focused on the five tasks most easily completable
 
 ### Rolling Changes
 
-<img width="250" src="https://i.imgur.com/GBpdnDx.jpg" title="user stories (after)" />
-
 + The first major change to the Kanban board to changing my idea from a user pressing a button to selecting data; theme and character names. This meant I had to change my html code and find a way to communicate the user input to service two and three. Then communicate this info to service four at the same time. I spent most of my time researching flask before_requests and after_requests, and using global variables to store data coming in at different times. 
-
-<img width="250" src="https://i.imgur.com/DLZWEeR.png" title="sprint2.1" />
 
 + As I was using global variables to solve my issue of post requests coming in at different times, I was faced with another issue when replicating the container for docker swarm. The global variables were container specific so when I was replicating it, the global variables reset to empty. To solve this, I had three options: to replicate the services utilising global variables once and document the issue, research into docker volumes and see if there's a way of replicating the containers based on the volumes of the original container, or re-design my entire application to ensure it wasn't using global variables at all. In the end, I went with the third option and gave myself a day to re-design the application and if it wasn't completed within that time-frame to result in the first resolution. 
 
-<img width="250" src="https://i.imgur.com/iYD7Tcx.png" title="sprint2.2" />
-
 + Reaching the end of week two, I had an application that didn't use global variables and had also found a way to programme Ansible to set the environment (downloading docker) assign worker/manager nodes without having to ssh into each virtual machine and manually doing it ourselves. I also researched into what I had to do for testing so added that onto to Yet to start on the kanban board. 
-
-+ I started researching into testing such as SonarQube (static testing tool) and Selenium (dynamic testing tool).
-
-<img src="https://i.imgur.com/SJngIqb.jpg" title="sprint3" />
 
 + SonarQube was not a requirement to implement so that became a dropped idea. 
 
 ### End Point
+
 <img src="https://i.imgur.com/Zqspd1D.png" title="ending" />
 
 
@@ -117,6 +102,7 @@ At the start of the project, I focused on the five tasks most easily completable
 |7|Docker Swarm|Docker wasn't as hard as I expected to understand. Continuous practise helped a lot.|
 |8|GCP service was throwing errors when running website|Recorded the deployment process so I can demonstrate it during presentation.|
 
+
 <img width="500" src="https://i.imgur.com/LAL1f7i.png" title="risk matrix" />
 
 
@@ -128,27 +114,15 @@ At the start of the project, I focused on the five tasks most easily completable
 
 At stage one, once the code is changed on visual studios, you push it up to GitHub. This initiates an automated Jenkins build at stage two. Jenkins then ensures ansible is started up at stage three. Ansible then pushes the new built image to Docker registry (Docker Hub). Ansible also assigns worker/manager nodes at stage four. At stage five, the manager node pulls down the image from Docker Hub and creates multiple containers (defined in docker-compose file) then deploys it to the worker nodes that are assigned to it. In my case, only one worker node was created. 
 
-<img width="500" src="https://i.imgur.com/OJC4HRc.jpg" title="communication" />
+<img src="https://i.imgur.com/YoNkeW8.png" title="communication" />
 
 The user presses a button that generates a random story. As the user only interacts and sees service one, HTML post and get requests were used to share information between the services. When we containerised our applications, we linked the containers by creating a docker network and allowing the connection to flow the same way as before. 
 
-### Issues Encountered
-
-+ 
-
-+ 
-
-
-## Testing
-
-### Pytest
-
-### Final Report
-
-
-## Deployment
+### Deployment
 
 ### Toolset
+
+<img src="https://i.imgur.com/wl13iqk.png" title="toolset" />
 
 + GCP Instance development environment
 
@@ -163,6 +137,21 @@ The user presses a button that generates a random story. As the user only intera
 + Ansible
 
 + Docker/Docker Swarm
+
+
+### Issues Encountered
+
++ 
+
++ 
+
+
+
+## Testing
+
+### Pytest
+
+### Final Report
 
 
 ## Improvements for Future Versions
