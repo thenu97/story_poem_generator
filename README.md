@@ -112,8 +112,8 @@ At the start of the project, I focused on the five tasks most easily completable
 
 
 |Risk No.|Risk|Solution|
-|---|---|---|---|
-|1|The brief being too hard to decipherAsked my peers, and emailed my manager to join our daily standups who explained the brief in more detail.|
+|---|---|---|
+|1|The brief being too hard to decipher|Asked my peers, and emailed my manager to join our daily standups who explained the brief in more detail.|
 |2|Developing mircoservices as it was a new concept to me|I put in hours of research to figure out how everything interlinked.|
 |3|GCP free credit running out|I stopped an instance when it wasn't being used and monitored the rate of credit drop.|
 |4|Facing issues with python/flask|Ensured I was doing at least 3 challenges a day to keep my python knowledge on pur.|
