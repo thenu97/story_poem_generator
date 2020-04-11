@@ -165,8 +165,9 @@ At the start of the project, I focused on the five tasks most easily completable
     + Master branch was the clean version where the commits and changes were kept very minial
     + Dev branch was for experimentation with docker
     + Jenkins branch was for playing aroung with my jenkins pipeline. 
-    + Jenkins branch was always ahead of the other two. Dev was ahead of master. 
-<img width="200" src="https://i.imgur.com/0tbS59L.png" title="master" /> <img width="200" src="https://i.imgur.com/NAzsAZG.png" title="dev" /> <img width="200" src="https://i.imgur.com/66hMzyn.png" title="jenkins" />
+    + Jenkins branch was always ahead of the other two. Dev was ahead of master.
+    
+<img src="https://i.imgur.com/0tbS59L.png" title="master" /> <img src="https://i.imgur.com/NAzsAZG.png" title="dev" /> <img src="https://i.imgur.com/66hMzyn.png" title="jenkins" />
 
 + GitHub Webhook
     + Every push on jenkins branch initiated jenkins build.  
