@@ -74,7 +74,7 @@ Due to this setup sprints could be passed through development, and, if required,
 
 <img width="250" src="https://i.imgur.com/KQNZeaX.jpg" title="moscow key" /> 
 
-<img width="250" src="https://i.imgur.com/VTKAvln.jpg" title="product backlog1" /> <img width="250" src="https://i.imgur.com/6khWR1B.jpg" title="product backlog2" /> <img width="250" src="https://i.imgur.com/SmZF0a4.jpg" title="product backlog3" /> <img width="250" src="https://i.imgur.com/jxzMAkA.jpg" title="product backlog4" />
+<img width="200" src="https://i.imgur.com/VTKAvln.jpg" title="product backlog1" /> <img width="200" src="https://i.imgur.com/6khWR1B.jpg" title="product backlog2" /> <img width="200" src="https://i.imgur.com/SmZF0a4.jpg" title="product backlog3" /> <img width="200" src="https://i.imgur.com/jxzMAkA.jpg" title="product backlog4" />
 
 
 <img src="https://i.imgur.com/JZuSiNO.png" title="sprint1" />
