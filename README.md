@@ -26,16 +26,32 @@ This is for the second project set by QA
     + [Final Report](#final-report)
 7. [Deployment](#deployment)
     + [Toolset](#toolset)
-8. [Improvements for Future](#improvements-for-future)
+8. [Retrospective](#retrospective)
 9. [Author](#authors)
 
 ## Project Brief
 
-The project requires a mirco-service oreintated architecture of a web application, which must be composed of at least 4 services that work together. With backend written in Python, Jenkins for CI service, and Ansible & Docker for CD.
+To create an app using:
++ Software Development with Python
++ CI/CD using Jenkins, Ansible pipeline (Seperate Cloud Services)
++ Nginx as reverse proxy
++ Managed MySQL database on the cloud
++ Docker and Orchestration using Docker-Swarm, Split app into micro-services in the cloud with built in redundancies such as Load-Balancing behind Nginx. (One Manager node, One Worker Node in Swarm)
++ Use Ansible to set up all VM's (Installing Dependencies and applications) using Playbook
++ Use Jenkins to set up multiple stages in the pipeline; Staging, Testing, Building and Deployment and implement a Git Webhook as a trigger
++ Implement Cloud Fundamentals such as test driven development, Continuous Integration and deployment, and a SCRUM based methodology
++ Micro-service oriented architecture composed of at least 4 services that work together and services 2,3,4 should be easily interchangeable using versioning on Dockerhub.
 
 ### Proposal
 
-My proposal focuses on the creation of a website for poetry and story genertor based on user input. 
+I decided to create a Story & Poem Generator with a Microservice architecture. My application will have 4 services not including Jenkins, Managed MYSQL db, Nginx server, Ansible Server and Docker Swarm.
+
++ Service 1 of my project is essentially the front-end where the stories and poems are displayed.
++ Service 2 and 3 will be services that generate the random theme and character name.
++ Service 4 is the back-end that decides between whether the user gets a "story" or a "poem".
++ I will be using Ansible as a way to stage all my environments, prepare them to run my services and deploy the docker swarm.
++ I will use Jenkins to build a testing and deployment pipeline using Jenkinsfile that will be triggered using Git/Github webhook
++ Nginx will be used as a Reverse Proxy to load balance all my services running on Docker Swarm
 
 ### Wireframes
 
@@ -58,7 +74,8 @@ Due to this setup sprints could be passed through development, and, if required,
 
 <img width="250" src="https://i.imgur.com/KQNZeaX.jpg" title="moscow key" /> 
 
-<img width="250" src="https://i.imgur.com/fMVWd2r.jpg" title="product backlog" /> 
+<img width="250" src="https://i.imgur.com/VTKAvln.jpg" title="product backlog1" /> <img width="250" src="https://i.imgur.com/6khWR1B.jpg" title="product backlog2" /> <img width="250" src="https://i.imgur.com/SmZF0a4.jpg" title="product backlog3" /> <img width="250" src="https://i.imgur.com/jxzMAkA.jpg" title="product backlog4" />
+
 
 <img src="https://i.imgur.com/JZuSiNO.png" title="sprint1" />
 
@@ -85,15 +102,18 @@ At the start of the project, I focused on the five tasks most easily completable
 |---|---|---|---|---|---|---|
 |1|Problems with developing 4 services.|Failed project as this is a needed requirement|3|5|15|Do more research into mircoservices and how systems involved work together.|
 |2|Overrunning on GCP free data limits.|An instance is left running, or an account breach enables the resources on the account to be drained.|1|5|5|Continue monitoring GCP usage. Copy databases offline as final backup.|
-|3|Problems with Python/Flask|Failed project as this is needed for the front end and backend of my application.|1|5|5|Practise Python through continuous challenges on Codewars.|
-|4|Problems with Jenkins|Not being able to CI/CD|2|5|10|Do more research into using Jenkins with Docker Swarm.|
-|5|Using Ansible Playbook|The project requires this but due to not using ansible before, this holds a great risk.|3|5|15|Study how Ansible is used through documentation provided and asked my trainer for resources.|
-|6|Docker|Required by the project but I haven't used this tool before so it holds high risks.|4|5|20|Research and docker documentation.|
+|3|Problems with Python/Flask|Failed project as this is needed for the front end and backend of my application.|1|2|2|Practise Python through continuous challenges on Codewars.|
+|4|Problems with Jenkins|Not being able to CI/CD|2|3|6|Do more research into using Jenkins with Docker Swarm.|
+|5|Using Ansible Playbook|The project requires this but due to not using ansible before, this holds a great risk.|3|4|12|Study how Ansible is used through documentation provided and asked my trainer for resources.|
+|6|Docker|Required by the project but I haven't used this tool before so it holds high risks.|2|3|6|Research and docker documentation.|
+
+
+<img src="https://i.imgur.com/I0HiOw2.png" title="risk matrix" />
 
 
 |Risk No.|Risk|Solution|
-|---|---|---|
-|1|The brief being too hard to decipher|Asked my peers, and emailed my manager to join our daily standups who explained the brief in more detail.|
+|---|---|---|---|
+|1|The brief being too hard to decipherAsked my peers, and emailed my manager to join our daily standups who explained the brief in more detail.|
 |2|Developing mircoservices as it was a new concept to me|I put in hours of research to figure out how everything interlinked.|
 |3|GCP free credit running out|I stopped an instance when it wasn't being used and monitored the rate of credit drop.|
 |4|Facing issues with python/flask|Ensured I was doing at least 3 challenges a day to keep my python knowledge on pur.|
@@ -101,9 +121,6 @@ At the start of the project, I focused on the five tasks most easily completable
 |6|Ansible - worker nodes|Researched into it and I was eventually able to support my colleagues with a solution that managed docker clusters.|
 |7|Docker Swarm|Docker wasn't as hard as I expected to understand. Continuous practise helped a lot.|
 |8|GCP service was throwing errors when running website|Recorded the deployment process so I can demonstrate it during presentation.|
-
-
-<img width="500" src="https://i.imgur.com/LAL1f7i.png" title="risk matrix" />
 
 
 ## Project Architecture
@@ -138,7 +155,6 @@ The user presses a button that generates a random story. As the user only intera
 
 + Docker/Docker Swarm
 
-
 ### Issues Encountered
 
 + 
@@ -146,15 +162,25 @@ The user presses a button that generates a random story. As the user only intera
 + 
 
 
-
 ## Testing
 
 ### Pytest
 
-### Final Report
+<img src="https://i.imgur.com/hll5I14.jpg" title="coverage html" />
+
+The coverage is at 56% because ....
 
 
-## Improvements for Future Versions
+## Retrospective
+
+### What Went Well?
++ The application was up and running within the containers linked by an overlay network. Dockerising the flask app was definitely the easiest and went well without any issues. 
+
+### What Didn't Go Well?
++ Ansible was a little harder to grasp as it was completely new and the documentation for it was much more dense than docker. 
+
+### Future Improvements
++ 
 
 
 
