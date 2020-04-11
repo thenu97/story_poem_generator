@@ -8,7 +8,7 @@ networks:
 
 services:
   service_1:
-    image: thenu97/home:latest
+    image: thenu97/home
     ports:
       - 5000:5000
     env_file:
@@ -16,31 +16,31 @@ services:
     networks:
       - swarm
     deploy:
-      replicas: 2
+      replicas: 3
 
 
   service_2:
-    image: thenu97/story:latest
+    image: thenu97/story
     networks:
       - swarm
     deploy:
-      replicas: 2
+      replicas: 3
 
 
   service_3:
-    image: thenu97/char:latest
+    image: thenu97/char
     networks:
       - swarm
     deploy:
-      replicas: 2
+      replicas: 3
 
 
   service_4:
-    image: thenu97/storchar:latest
+    image: thenu97/storchar
     networks:
       - swarm
     deploy:
-      replicas: 2
+      replicas: 3
 
 
   service_nginx:
@@ -55,4 +55,4 @@ services:
       - service_3
       - service_4
     deploy:
-      replicas: 1
+      replicas: 3
