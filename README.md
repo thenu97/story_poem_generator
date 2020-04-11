@@ -58,9 +58,9 @@ Due to this setup sprints could be passed through development, and, if required,
 
 <img width="250" src="https://i.imgur.com/KQNZeaX.jpg" title="moscow key" /> 
 
-<img width="250" src="https://i.imgur.com/fMVWd2r.jpg" title="product backlog" /> <img width="250" src="https://i.imgur.com/stOZ67u.jpg" title="sprint backlog" /> <img width="250" src="https://i.imgur.com/3OQBSDR.jpg" title="user stories" /> 
+<img width="250" src="https://i.imgur.com/fMVWd2r.jpg" title="product backlog" /> 
 
-<img src="https://i.imgur.com/Iblbwox.png" title="sprint1" />
+<img src="https://i.imgur.com/JZuSiNO.png" title="sprint1" />
 
 At the start of the project, I focused on the five tasks most easily completable in the first week of training: Starting the Kanban board [itself](https://app.asana.com/0/1169906447683321/board), starting this documentation, instituting a github repository for the project, which can be found [here](https://github.com/thenu97/story_poem_generator), initialising the risk assessment for the project in line with my initial understanding, and researching Docker covered in lesson as we went along.
 
