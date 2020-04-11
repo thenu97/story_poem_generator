@@ -16,17 +16,14 @@ This is for the second project set by QA
 3. [Risk Assessment](#risk-assessment)
 4. [Project Architecture](#project-architecture)
     + [Architecture Diagram](#architecture-diagram)
+    + [Networking](#networking)
+    + [Deployment](#deployment)
     + [Issues Encountered](#issues-encountered)
-5. [Design Considerations](#design-considerations)
-    + [Front End](#front-end)
-    + [Back End](#back-end)
-    + [UI](#ui)
+    + [Toolset](#toolset)
 6. [Testing](#testing)
     + [Pytest Testing](#pytest)
-    + [Final Report](#final-report)
-7. [Deployment](#deployment)
-    + [Toolset](#toolset)
-8. [Retrospective](#retrospective)
+7. [Retrospective](#retrospective)
+8. [Installation Guide](#install)
 9. [Author](#authors)
 
 ## Project Brief
@@ -152,6 +149,7 @@ At the start of the project, I focused on the five tasks most easily completable
 + Jenkins then goes ahead and tests the installation process and URL locally 
 + Initiates Ansible to set the environment, assign nodes and deploy swarm
 
+
 ### Toolset
 
 <img src="https://i.imgur.com/wl13iqk.png" title="toolset" />
@@ -207,12 +205,6 @@ At the start of the project, I focused on the five tasks most easily completable
     + Compresses inbound & outbound data
     + Details about NGINX can be found [here](https://nginx.org/en/docs/)
 
-### Issues Encountered
-
-+ 
-
-+ 
-
 
 ## Testing
 
@@ -220,22 +212,44 @@ At the start of the project, I focused on the five tasks most easily completable
 
 <img src="https://i.imgur.com/hll5I14.jpg" title="coverage html" />
 
-The coverage is at 56% because ....
-
++ The coverage was 56% because I didn't test everything in app.py 
+    + It was 16% for app.py because I imported a route name from service 1
++ URL tests were 100% because the application was up and running 
++ Database tests were 100%
 
 ## Retrospective
 
 ### What Went Well?
-+ The application was up and running within the containers linked by an overlay network. Dockerising the flask app was definitely the easiest and went well without any issues. 
++ Completed project within timeframe and most of it being above spec.
++ Involving multiple VMs achieved
++ Ansible and Docker were very interesting tools to learn
 
-### What Didn't Go Well?
-+ Ansible was a little harder to grasp as it was completely new and the documentation for it was much more dense than docker. 
+### Issues Encountered
+
++ At the end of week two, I had to change my entire project around to ensure they were not using global variables. Global variables did not go well with the replication of containers. I did want to look into the properties of volumes but I wanted to structure my application a little better.
++ Due to not having previous experience with Ansible, it was hard to understand how to assign tasks.
++ Automated build in Jenkins wouldn't start at every git push. 
++ Constantly changing IP addresses pf VM instances on GCP due to them not being static. 
++ SonarQube not wanting to run although I pulled down the latest image on dockerhub. 
++ The automated docker builds took their time as it was a free service. 
 
 ### Future Improvements
-+ 
+
+<img src="https://i.imgur.com/IXwJzan.png" title="sprint for future" /></a>
+
++ CRUD functionality
++ Selenium
++ Trying to get coverage above 70%
++ More theme options for the user
++ Add music to match the theme as another service
 
 
 ## Installation Guide
+- Requirements:
+    - 2 (preferrably 3) GCP Compute Engine Instances running on Ubuntu 18.04
+    - SSH keys (created using ssh-keygen) and the public key added to each instance in the SSH Keys section of the instances.
+    - Jenkins & Ansible installed in one of the instances. 
+
 
 ## Authors
 
