@@ -45,13 +45,12 @@ To create an app using:
 ### Proposal
 
 I decided to create a Story & Poem Generator with a Microservice architecture. My application will have 4 services not including Jenkins, Managed MYSQL db, Nginx server, Ansible Server and Docker Swarm.
-
 + Service 1 of my project is essentially the front-end where the stories and poems are displayed.
 + Service 2 and 3 will be services that generate the random theme and character name.
 + Service 4 is the back-end that decides between whether the user gets a "story" or a "poem".
 + I will be using Ansible as a way to stage all my environments, prepare them to run my services and deploy the docker swarm.
-+ I will use Jenkins to build a testing and deployment pipeline using Jenkinsfile that will be triggered using Git/Github webhook
-+ Nginx will be used as a Reverse Proxy to load balance all my services running on Docker Swarm
++ I will use Jenkins to build a testing and deployment pipeline using Jenkinsfile that will be triggered using Git/Github webhook.
++ Nginx will be used as a Reverse Proxy to load balance all my services running on Docker Swarm.
 
 ### Wireframes
 
@@ -127,33 +126,85 @@ At the start of the project, I focused on the five tasks most easily completable
 
 ### Overall Architecture
 
-<img src="https://i.imgur.com/i3cK01G.jpg" title="deployment process" />
+<img src="https://i.imgur.com/RkYpe6V.png" title="architecture" />
 
-At stage one, once the code is changed on visual studios, you push it up to GitHub. This initiates an automated Jenkins build at stage two. Jenkins then ensures ansible is started up at stage three. Ansible then pushes the new built image to Docker registry (Docker Hub). Ansible also assigns worker/manager nodes at stage four. At stage five, the manager node pulls down the image from Docker Hub and creates multiple containers (defined in docker-compose file) then deploys it to the worker nodes that are assigned to it. In my case, only one worker node was created. 
++ I essentially have three virtual machines: one master, one manager, one worker. My master has only Jenkins and ansible installed on it. 
++ Jenkins first uses a pipeline to test if docker installation, docker-swarm deployment works within the master node. 
++ If that passes, it invokes Ansible. 
++ Ansible SSHs into the manager and worker node to set the environment and initiate swarm manager and ensures the other node joins as worker. 
++ It then SSHs into just the manager node to deploy the stack.
++ One of the fundamental of swarm is that it shares the number of containers among the nodes. [5 containers (including NGINX) with 3 replicas]
++ NGINX then comes in as a reverse proxy and directs any service coming in on port 5000 to port 80. 
+
+### Networking
 
 <img src="https://i.imgur.com/YoNkeW8.png" title="communication" />
 
-The user presses a button that generates a random story. As the user only interacts and sees service one, HTML post and get requests were used to share information between the services. When we containerised our applications, we linked the containers by creating a docker network and allowing the connection to flow the same way as before. 
++ The services are running on the same docker overlay network.  
++ This enables them to send and receive post/get requests.
 
 ### Deployment
+
+<img src="https://i.imgur.com/i3cK01G.jpg" title="deployment process" />
+
++ Code changed on VSC by developers and pushed up to GitHub
++ GitHub uses webhooks to initiate build in Jenkins 
++ Jenkins then goes ahead and tests the installation process and URL locally 
++ Initiates Ansible to set the environment, assign nodes and deploy swarm
 
 ### Toolset
 
 <img src="https://i.imgur.com/wl13iqk.png" title="toolset" />
 
-+ GCP Instance development environment
++ GCP Instances (Cloud Provider)
+    + Virtual machines are based on computer architectures and provide functionality of a physical computer. Their implementations may involve specialized hardware, software, or a combination.
+    + MySQL for data persistence.
+
++ GitHub - Version Control
+    + Feature-branch model. I had 3 branches: master, dev, jenkins. 
+    + Master branch was the clean version where the commits and changes were kept very minial
+    + Dev branch was for experimentation with docker
+    + Jenkins branch was for playing aroung with my jenkins pipeline. 
+    + Jenkins branch was always ahead of the other two. Dev was ahead of master. 
+<img width="200" src="https://i.imgur.com/0tbS59L.png" title="master" /> <img width="200" src="https://i.imgur.com/NAzsAZG.png" title="dev" /> <img width="200" src="https://i.imgur.com/66hMzyn.png" title="jenkins" />
 
 + GitHub Webhook
+    + Every push on jenkins branch initiated jenkins build.  
 
-+ Jenkins Server
-
-+ Pipeline build coded in Groovy and Shell.
++ Jenkins Server (CI tool)
+    + Pipeline with 7 stages:
+        + Test Docker Install
+        + Test Docker Swarm
+        + Install Ansible
+        + Envirnoment Setting (via Ansible)
+        + Nodes Assigning (via Ansible)
+        + Deploy Swarm (via Ansible)
+        + Testing
+    + Pipeline coded in Groovy & Shell
+    + Details about Jenkins can be found [here](https://jenkins.io/doc/)
 
 + Testing in Pytest using the Coverage module.
 
-+ Ansible
++ Ansible in YAML (CD & Orchestration tool)
+    + Automation Engine
+    + Envirnoment Setting (via Ansible)
+    + Nodes Assigning (via Ansible)
+    + Deploy Swarm (via Ansible)
+    + Testing
+    + Details about Ansible can be found [here](https://docs.ansible.com/)
 
-+ Docker/Docker Swarm
++ Docker/Docker Swarm (CD tool)
+    + Containerisation instrument
+    + Uses images from Docker Hub to create containers
+    + Uses networks to communicate within containers
+    + Dockerfiles are used to create images
+    + Docker-compose are files written in YAML for the creation and activation of containers.
+    + Details about Jenkins can be found [here](https://docs.docker.com/)
+
++ NGINX (Reverse proxy)
+    + Acts as a "traffic cop"
+    + Compresses inbound & outbound data
+    + Details about NGINX can be found [here](https://nginx.org/en/docs/)
 
 ### Issues Encountered
 
@@ -183,6 +234,7 @@ The coverage is at 56% because ....
 + 
 
 
+## Installation Guide
 
 ## Authors
 
