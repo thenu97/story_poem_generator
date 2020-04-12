@@ -2,7 +2,7 @@
 ---
 # Poem & Story Generator
 
-Written in reference to QAC - Fundamental Project Specification (DevOps Core) . This second project is for the purpose of fulfilling the specification definition for the project assignment due Week 9 of the DevOps February 17 2020 intake cohort.
+This is for the second project set by QA
 
 ## Table of Contents
 
@@ -16,39 +16,48 @@ Written in reference to QAC - Fundamental Project Specification (DevOps Core) . 
 3. [Risk Assessment](#risk-assessment)
 4. [Project Architecture](#project-architecture)
     + [Architecture Diagram](#architecture-diagram)
+    + [Networking](#networking)
+    + [Deployment](#deployment)
     + [Issues Encountered](#issues-encountered)
-5. [Design Considerations](#design-considerations)
-    + [Front End](#front-end)
-    + [Back End](#back-end)
-    + [UI](#ui)
+    + [Toolset](#toolset)
 6. [Testing](#testing)
     + [Pytest Testing](#pytest)
-    + [Final Report](#final-report)
-7. [Deployment](#deployment)
-    + [Toolset](#toolset)
-8. [Improvements for Future](#improvements-for-future)
-+ [Author](#authors)
+7. [Retrospective](#retrospective)
+8. [Installation Guide](#install)
+9. [Author](#authors)
 
 ## Project Brief
 
-The project requires a mirco-service oreintated architecture of a web application, which must be composed of at least 4 services that work together. With backend written in Python, Jenkins for CI service, and Ansible & Docker for CD.
+To create an app using:
++ Software Development with Python
++ CI/CD using Jenkins, Ansible pipeline (Seperate Cloud Services)
++ Nginx as reverse proxy
++ Managed MySQL database on the cloud
++ Docker and Orchestration using Docker-Swarm, Split app into micro-services in the cloud with built in redundancies such as Load-Balancing behind Nginx. (One Manager node, One Worker Node in Swarm)
++ Use Ansible to set up all VM's (Installing Dependencies and applications) using Playbook
++ Use Jenkins to set up multiple stages in the pipeline; Staging, Testing, Building and Deployment and implement a Git Webhook as a trigger
++ Implement Cloud Fundamentals such as test driven development, Continuous Integration and deployment, and a SCRUM based methodology
++ Micro-service oriented architecture composed of at least 4 services that work together and services 2,3,4 should be easily interchangeable using versioning on Dockerhub.
 
 ### Proposal
 
-My proposal focuses on the creation of a website for poetry and story genertor based on user input. 
+I decided to create a Story & Poem Generator with a Microservice architecture. My application will have 4 services not including Jenkins, Managed MYSQL db, Nginx server, Ansible Server and Docker Swarm.
++ Service 1 of my project is essentially the front-end where the stories and poems are displayed.
++ Service 2 and 3 will be services that generate the random theme and character name.
++ Service 4 is the back-end that decides between whether the user gets a "story" or a "poem".
++ I will be using Ansible as a way to stage all my environments, prepare them to run my services and deploy the docker swarm.
++ I will use Jenkins to build a testing and deployment pipeline using Jenkinsfile that will be triggered using Git/Github webhook.
++ Nginx will be used as a Reverse Proxy to load balance all my services running on Docker Swarm.
 
 ### Wireframes
 
-![A picture of my initial idea](images/wireframe(1).JPG | width=48)
+<img src="https://i.imgur.com/pWyR2jp.png" title="wireframes" />
 
-![First change made](images/wireframe(2).JPG)
++ My initial idea was to have a simple button so when the user pressed it, it displayed a story of a random theme with random character names substituted in it. In other words, service two picks out a theme at a random from a list of three and service three picks out a male and female character name from a list of fourteen, for which service four puts it all together and sends it back to service one. 
 
-Initial idea was to have service two choose a story based on the theme user selected and service three attain character names from user, and have them send it over to service four, which will send a story with the character names substituted in place.
++ To make it more user friendly/interactive, I changed it so that the user gets to choose the theme and character name they want by adding user input. This shortened the character name list to three from fourteen. 
 
-![Final layout for story](images/finalwire(story).JPG)
-![Final layout for poem](images/finalwire(poem).JPG)
-
-Final idea was have service one store the literacy pieces and service two and three generate randomised information to insert into them. Service four then gets to decide whether it is a story or a poem based on user's choice. 
++ In the end, instead of having service four take a lot in with sending a whole story over to service one, I thought I could just store the literacy pieces in service one and have service four just choose between poem and story depending on service two and three. 
 
 
 ## Asana Board
@@ -59,53 +68,43 @@ Due to this setup sprints could be passed through development, and, if required,
 
 ### Start Point
 
-![Product Backlog](images/jointreq.jpg =) ![Sprint Backlog](images/spintbacklog.JPG)
+<img width="250" src="https://i.imgur.com/KQNZeaX.jpg" title="moscow key" /> 
 
-![User Story Before](images/usrstrbef.JPG) 
+<img width="200" src="https://i.imgur.com/VTKAvln.jpg" title="product backlog1" /> <img width="200" src="https://i.imgur.com/6khWR1B.jpg" title="product backlog2" /> <img width="200" src="https://i.imgur.com/SmZF0a4.jpg" title="product backlog3" /> <img width="200" src="https://i.imgur.com/jxzMAkA.jpg" title="product backlog4" />
 
-![Sprint One](images/sprint(1).png)
 
-At the start of the project, I focussed on the five tasks most easily completable in the first week of training: Starting the Kanban board [itself](https://app.asana.com/0/1169906447683321/board), starting this documentation, instituting a github repository for the project, which can be found [here](https://github.com/thenu97/SFIA-PROJECT2-QA), initialising the risk assessment for the project in line with my initial understanding, and researching Docker covered in lesson as we went along.
+<img src="https://i.imgur.com/JZuSiNO.png" title="sprint1" />
+
+At the start of the project, I focused on the five tasks most easily completable in the first week of training: Starting the Kanban board [itself](https://app.asana.com/0/1169906447683321/board), starting this documentation, instituting a github repository for the project, which can be found [here](https://github.com/thenu97/story_poem_generator), initialising the risk assessment for the project in line with my initial understanding, and researching Docker covered in lesson as we went along.
 
 ### Rolling Changes
 
-![User Story After](images/usrstraft.JPG)
-
 + The first major change to the Kanban board to changing my idea from a user pressing a button to selecting data; theme and character names. This meant I had to change my html code and find a way to communicate the user input to service two and three. Then communicate this info to service four at the same time. I spent most of my time researching flask before_requests and after_requests, and using global variables to store data coming in at different times. 
-
-![Sprint Two](images/sprint(2.1).png) 
 
 + As I was using global variables to solve my issue of post requests coming in at different times, I was faced with another issue when replicating the container for docker swarm. The global variables were container specific so when I was replicating it, the global variables reset to empty. To solve this, I had three options: to replicate the services utilising global variables once and document the issue, research into docker volumes and see if there's a way of replicating the containers based on the volumes of the original container, or re-design my entire application to ensure it wasn't using global variables at all. In the end, I went with the third option and gave myself a day to re-design the application and if it wasn't completed within that time-frame to result in the first resolution. 
 
-![Sprint Two Continued](images/sprint(2.2).png)
-
 + Reaching the end of week two, I had an application that didn't use global variables and had also found a way to programme Ansible to set the environment (downloading docker) assign worker/manager nodes without having to ssh into each virtual machine and manually doing it ourselves. I also researched into what I had to do for testing so added that onto to Yet to start on the kanban board. 
 
-+ I started researching into testing such as SonarQube (static testing tool) and Selenium (dynamic testing tool).
-
-![Final Sprint](images/sprint(3).png)
-
-+ Testing commentary awaits...
++ SonarQube was not a requirement to implement so that became a dropped idea. 
 
 ### End Point
-![Everything done](images/sprint(4).png)
+
+<img src="https://i.imgur.com/Zqspd1D.png" title="ending" />
 
 
 ## Risk Assessment
 
 |Risk No.|Risk|Effect|Likelihood|Serverity|Importance|Mitigate|
 |---|---|---|---|---|---|---|
-|1|Not understanding the brief given.|Failed project|2|5|10|Ask as many questions as possible, research, re-read.|
-|2|Problems with developing 4 services.|Failed project as this is a needed requirement|3|5|15|Do more research into mircoservices and how systems involved work together.|
-|3|Overrunning on GCP free data limits.|An instance is left running, or an account breach enables the resources on the account to be drained.|1|5|5|Continue monitoring GCP usage. Copy databases offline as final backup.|
-|4|Problems with Python/Flask|Failed project as this is needed for the front end and backend of my application.|1|5|5|Practise Python through continuous challenges on Codewars.|
-|5|Problems with Jenkins|Not being able to CI/CD|2|5|10|Do more research into using Jenkins with Docker Swarm.|
-|6|Using Ansible Playbook|The project requires this but due to not using ansible before, this holds a great risk.|3|5|15|Study how Ansible is used through documentation provided and asked my trainer for resources.|
-|7|Docker|Required by the project but I haven't used this tool before so it holds high risks.|4|5|20|Research and docker documentation.|
+|1|Problems with developing 4 services.|Failed project as this is a needed requirement|3|5|15|Do more research into mircoservices and how systems involved work together.|
+|2|Overrunning on GCP free data limits.|An instance is left running, or an account breach enables the resources on the account to be drained.|1|5|5|Continue monitoring GCP usage. Copy databases offline as final backup.|
+|3|Problems with Python/Flask|Failed project as this is needed for the front end and backend of my application.|1|2|2|Practise Python through continuous challenges on Codewars.|
+|4|Problems with Jenkins|Not being able to CI/CD|2|3|6|Do more research into using Jenkins with Docker Swarm.|
+|5|Using Ansible Playbook|The project requires this but due to not using ansible before, this holds a great risk.|3|4|12|Study how Ansible is used through documentation provided and asked my trainer for resources.|
+|6|Docker|Required by the project but I haven't used this tool before so it holds high risks.|2|3|6|Research and docker documentation.|
 
-![Risk Matrix](images/riskmatrix.png)
 
-To be commented on later... 
+<img src="https://i.imgur.com/I0HiOw2.png" title="risk matrix" />
 
 
 |Risk No.|Risk|Solution|
@@ -117,54 +116,141 @@ To be commented on later...
 |5|Jenkins automated build|I researched into how Docker Swarm tied in with Jenkins and drew a pipeline that help me grasp the idea better.|
 |6|Ansible - worker nodes|Researched into it and I was eventually able to support my colleagues with a solution that managed docker clusters.|
 |7|Docker Swarm|Docker wasn't as hard as I expected to understand. Continuous practise helped a lot.|
+|8|GCP service was throwing errors when running website|Recorded the deployment process so I can demonstrate it during presentation.|
 
 
 ## Project Architecture
 
 ### Overall Architecture
 
-![Overall](images/pipeline(num).JPG)
+<img src="https://i.imgur.com/RkYpe6V.png" title="architecture" />
 
-At stage one, once the code is changed on visual studios, you push it up to GitHub. This initiates an automated Jenkins build at stage two. Jenkins then ensures ansible is started up at stage three. Ansible then pushes the new built image to Docker registry (Docker Hub). Ansible also assigns worker/manager nodes at stage four. At stage five, the manager node pulls down the image from Docker Hub and creates multiple containers (defined in docker-compose file) then deploys it to the worker nodes that are assigned to it. In my case, only one worker node was created. 
++ I essentially have three virtual machines: one master, one manager, one worker. My master has only Jenkins and ansible installed on it. 
++ Jenkins first uses a pipeline to test if docker installation, docker-swarm deployment works within the master node. 
++ If that passes, it invokes Ansible. 
++ Ansible SSHs into the manager and worker node to set the environment and initiate swarm manager and ensures the other node joins as worker. 
++ It then SSHs into just the manager node to deploy the stack.
++ One of the fundamental of swarm is that it shares the number of containers among the nodes. [5 containers (including NGINX) with 3 replicas]
++ NGINX then comes in as a reverse proxy and directs any service coming in on port 5000 to port 80. 
 
-![Communication](images/architecture.JPG)
-The user presses a button that generates a random story. As the user only interacts and sees service one, HTML post and get requests were used to share information between the services. When we containerised our applications, we linked the containers by creating a docker network and allowing the connection to flow the same way as before. 
+### Networking
 
-### Issues Encountered
+<img src="https://i.imgur.com/YoNkeW8.png" title="communication" />
 
-+ 
++ The services are running on the same docker overlay network.  
++ This enables them to send and receive post/get requests.
 
-+ 
+### Deployment
+
+<img src="https://i.imgur.com/i3cK01G.jpg" title="deployment process" />
+
++ Code changed on VSC by developers and pushed up to GitHub
++ GitHub uses webhooks to initiate build in Jenkins 
++ Jenkins then goes ahead and tests the installation process and URL locally 
++ Initiates Ansible to set the environment, assign nodes and deploy swarm
+
+
+### Toolset
+
+<img src="https://i.imgur.com/wl13iqk.png" title="toolset" />
+
++ GCP Instances (Cloud Provider)
+    + Virtual machines are based on computer architectures and provide functionality of a physical computer. Their implementations may involve specialized hardware, software, or a combination.
+    + MySQL for data persistence.
+
++ GitHub - Version Control
+    + Feature-branch model. I had 3 branches: master, dev, jenkins. 
+    + Master branch was the clean version where the commits and changes were kept very minial
+    + Dev branch was for experimentation with docker
+    + Jenkins branch was for playing aroung with my jenkins pipeline. 
+    + Jenkins branch was always ahead of the other two. Dev was ahead of master.
+    
+<img src="https://i.imgur.com/0tbS59L.png" title="master" /> <img src="https://i.imgur.com/NAzsAZG.png" title="dev" /> <img src="https://i.imgur.com/66hMzyn.png" title="jenkins" />
+
++ GitHub Webhook
+    + Every push on jenkins branch initiated jenkins build.  
+
++ Jenkins Server (CI tool)
+    + Pipeline with 7 stages:
+        + Test Docker Install
+        + Test Docker Swarm
+        + Install Ansible
+        + Envirnoment Setting (via Ansible)
+        + Nodes Assigning (via Ansible)
+        + Deploy Swarm (via Ansible)
+        + Testing
+    + Pipeline coded in Groovy & Shell
+    + Details about Jenkins can be found [here](https://jenkins.io/doc/)
+
++ Testing in Pytest using the Coverage module.
+
++ Ansible in YAML (CD & Orchestration tool)
+    + Automation Engine
+    + Envirnoment Setting (via Ansible)
+    + Nodes Assigning (via Ansible)
+    + Deploy Swarm (via Ansible)
+    + Testing
+    + Details about Ansible can be found [here](https://docs.ansible.com/)
+
++ Docker/Docker Swarm (CD tool)
+    + Containerisation instrument
+    + Uses images from Docker Hub to create containers
+    + Uses networks to communicate within containers
+    + Dockerfiles are used to create images
+    + Docker-compose are files written in YAML for the creation and activation of containers.
+    + Details about Jenkins can be found [here](https://docs.docker.com/)
+
++ NGINX (Reverse proxy)
+    + Acts as a "traffic cop"
+    + Compresses inbound & outbound data
+    + Details about NGINX can be found [here](https://nginx.org/en/docs/)
 
 
 ## Testing
 
 ### Pytest
 
-### Final Report
+<img src="https://i.imgur.com/hll5I14.jpg" title="coverage html" />
+
++ The coverage was 56% because I didn't test everything in app.py 
+    + It was 16% for app.py because I imported a route name from service 1
++ URL tests were 100% because the application was up and running 
++ Database tests were 100%
+
+## Retrospective
+
+### What Went Well?
++ Completed project within timeframe and most of it being above spec.
++ Involving multiple VMs achieved
++ Ansible and Docker were very interesting tools to learn
+
+### Issues Encountered
+
++ At the end of week two, I had to change my entire project around to ensure they were not using global variables. Global variables did not go well with the replication of containers. I did want to look into the properties of volumes but I wanted to structure my application a little better.
++ Due to not having previous experience with Ansible, it was hard to understand how to assign tasks.
++ Automated build in Jenkins wouldn't start at every git push. 
++ Constantly changing IP addresses pf VM instances on GCP due to them not being static. 
++ SonarQube not wanting to run although I pulled down the latest image on dockerhub. 
++ The automated docker builds took their time as it was a free service. 
+
+### Future Improvements
+
+<img src="https://i.imgur.com/IXwJzan.png" title="sprint for future" /></a>
+
++ CRUD functionality
++ Selenium
++ Trying to get coverage above 70%
++ More theme options for the user
++ Add music to match the theme as another service
 
 
-## Deployment
-
-### Toolset
-
-+ GCP Instance development environment
-
-+ GitHub Webhook
-
-+ Jenkins Server
-
-+ Pipeline build coded in Groovy and Shell.
-
-+ Testing in Pytest using the Coverage module.
-
-+ Ansible
-
-+ Docker/Docker Swarm
+## Installation Guide
+- Requirements:
+    - 2 (preferrably 3) GCP Compute Engine Instances running on Ubuntu 18.04
+    - SSH keys (created using ssh-keygen) and the public key added to each instance in the SSH Keys section of the instances.
+    - Jenkins & Ansible installed in one of the instances. 
 
 
-## Improvements for Future Versions
-
-#### Authors
+## Authors
 
 Thenuja Viknarajah
