@@ -1,7 +1,7 @@
 import urllib3, flask, pytest, requests, os
 from flask_mysqldb import MySQL
 from flask import Flask
-from app import home
+from app import home, crud, update, delete
 
 app = Flask(__name__)
 
@@ -35,7 +35,7 @@ def test_worker_home2():
     assert r.status_code == 200
 
 def test_nonexist():
-    r = requests.get("http://35.214.24.78/nonexist")
+    r = requests.get("http://35.246.33.39/nonexist")
     assert r.status_code == 404
 
 def test_getresponse():
@@ -49,35 +49,60 @@ def test_getresponse1():
 
 
 ############################################################### testing db ###############################################################
+def test_select():
+    with app.app_context():
+        cur = mysql.connection.cursor()
+        resultValue = cur.execute("SELECT * FROM lit")
+        mysql.connection.commit()
+        cur.close()
+    print(resultValue)
+    assert 5 == resultValue
+
+
 
 def test_insert():
     with app.app_context():
         m = []
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO story (theme, chars, decide) VALUES ('Testing', 'Testing', 'Testing')")
+        cur.execute("INSERT INTO lit (theme, chars, decide, up) VALUES ('Testing', 'Testing', 'Testing', 99)")
         mysql.connection.commit()
-        cur.execute("SELECT * FROM story") #this gets record after update
+        cur.execute("SELECT * FROM lit") #this gets record after update
         record_after = cur.fetchall()
-        print(record_after)
         for i in record_after:
             for j in i:
                 m.append(j)
         cur.close()
-    lena = len(record_after)
+    assert('Testing') == m[-4]
     assert('Testing') == m[-3]
     assert('Testing') == m[-2]
-    assert('Testing') == m[-1]
+    assert 99 == m[-1]
+
+
+
+def test_update():
+    with app.app_context():
+        m = []
+        cur = mysql.connection.cursor()
+        cur.execute("UPDATE lit SET theme = 'TESTING' WHERE up = 99")
+        mysql.connection.commit()
+        cur.execute("SELECT * FROM lit")
+        records_after = cur.fetchall()
+        for i in records_after:
+            for j in i:
+                m.append(j)
+        cur.close()
+    assert('TESTING') == m[-4]
+
+
 
 def test_delete():
     with app.app_context():
         cur = mysql.connection.cursor()
-        records_before = cur.execute("SELECT * FROM story")
-        print(records_before)
+        records_before = cur.execute("SELECT * FROM lit")
         mysql.connection.commit()
-        cur.execute("DELETE FROM story WHERE theme = 'Testing'")
+        cur.execute("DELETE FROM lit WHERE theme = 'TESTING'")
         mysql.connection.commit()
-        records_after = cur.execute("SELECT * FROM story")
-        print(records_after)
+        records_after = cur.execute("SELECT * FROM lit")
         mysql.connection.commit()
         cur.close()
     assert records_before - 1 == records_after
