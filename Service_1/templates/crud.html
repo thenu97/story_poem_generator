@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block subcontent %}
+
+        <heaD>
+            <title>Character Names</title>
+        </heaD>
+        <body>
+            <h1>
+                Create your own story with the character & theme below
+            </h1>
+            <p>
+           {{ sentence | safe }}
+            
+            </p>
+
+            <table cellpadding="5" >
+
+              <tr>
+                <td style="padding:0 15px;"> <a href="/update" class="btn btn-primary">Update</a></td>
+                <td style="padding:0 15px;"> <a href="/delete" class="btn btn-danger">Delete</a></td>
+              </tr>
+
+{% endblock %}
