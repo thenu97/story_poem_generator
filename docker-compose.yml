@@ -13,38 +13,34 @@ services:
       - 5000:5000
     env_file:
       - ./.env
-    restart: always
     networks:
       - swarm
     deploy:
-      replicas: 2
+      replicas: 3
 
 
   service_2:
     image: thenu97/story
-    restart: always
     networks:
       - swarm
     deploy:
-      replicas: 2
+      replicas: 3
 
 
   service_3:
     image: thenu97/char
-    restart: always
     networks:
       - swarm
     deploy:
-      replicas: 2
+      replicas: 3
 
 
   service_4:
     image: thenu97/storchar
-    restart: always
     networks:
       - swarm
     deploy:
-      replicas: 2
+      replicas: 3
 
 
   service_nginx:
@@ -59,4 +55,4 @@ services:
       - service_3
       - service_4
     deploy:
-      replicas: 1
+      replicas: 3
