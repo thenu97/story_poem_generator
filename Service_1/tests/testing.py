@@ -12,17 +12,17 @@ app.config['MYSQL_DB'] = os.environ['MYSQLDB']
 
 mysql = MySQL(app)
 
-url = "http://35.214.24.78/"
-url2 = "http://35.214.24.78:5000/"
-url3 = "http://35.246.33.39/"
-url4 = "http://35.246.33.39:5000/"
+url = 'http://35.214.21.98/'
+url2 = 'http://35.214.21.98/crud'
+url3 = 'http://35.189.121.149/'
+url4 = 'http://35.189.121.149/crud'
 
 ############################################################### testing url ###############################################################
 def test_urlmanager_home():
     r = requests.get(url)
     assert r.status_code == 200
 
-def test_manager_home2():
+def test_manager_crud():
     r = requests.get(url2)
     assert r.status_code == 200
 
@@ -30,12 +30,12 @@ def test_worker_home():
     r = requests.get(url3)
     assert r.status_code == 200
 
-def test_worker_home2():
+def test_worker_crud():
     r = requests.get(url4)
     assert r.status_code == 200
 
 def test_nonexist():
-    r = requests.get("http://35.246.33.39/nonexist")
+    r = requests.get("http://35.214.21.98/nonexist")
     assert r.status_code == 404
 
 def test_getresponse():
@@ -58,7 +58,14 @@ def test_select():
     print(resultValue)
     assert 5 == resultValue
 
-
+def test_describe():
+    with app.app_context():
+        cur = mysql.connection.cursor()
+        cur.execute("DESCRIBE lit;")
+        col = len(cur.fetchall())
+        mysql.connection.commit()
+        cur.close()
+        assert col == 5
 
 def test_insert():
     with app.app_context():
