@@ -23,7 +23,7 @@ This is for the second project set by QA
 6. [Testing](#testing)
     + [Pytest Testing](#pytest)
 7. [Retrospective](#retrospective)
-8. [Installation Guide](#install)
+8. [How to run the webapp?](#install)
 9. [Author](#authors)
 
 ## Project Brief
@@ -48,6 +48,7 @@ I decided to create a Story & Poem Generator with a Microservice architecture. M
 + I will be using Ansible as a way to stage all my environments, prepare them to run my services and deploy the docker swarm.
 + I will use Jenkins to build a testing and deployment pipeline using Jenkinsfile that will be triggered using Git/Github webhook.
 + Nginx will be used as a Reverse Proxy to load balance all my services running on Docker Swarm.
++ Have full CRUD functionality
 
 ### Wireframes
 
@@ -59,6 +60,9 @@ I decided to create a Story & Poem Generator with a Microservice architecture. M
 
 + In the end, instead of having service four take a lot in with sending a whole story over to service one, I thought I could just store the literacy pieces in service one and have service four just choose between poem and story depending on service two and three. 
 
++ After implementing crud, my website looked as below:
+
+<img width="250" src="https://i.imgur.com/2uFXicC.png" title="first page" />  <img src="https://i.imgur.com/OoZ40Zm.png" title="2nd page" />
 
 ## Asana Board
 
@@ -86,6 +90,8 @@ At the start of the project, I focused on the five tasks most easily completable
 + Reaching the end of week two, I had an application that didn't use global variables and had also found a way to programme Ansible to set the environment (downloading docker) assign worker/manager nodes without having to ssh into each virtual machine and manually doing it ourselves. I also researched into what I had to do for testing so added that onto to Yet to start on the kanban board. 
 
 + SonarQube was not a requirement to implement so that became a dropped idea. 
+
++ Added CRUD functionality. Subsequently, changed testing to fit crud functionality and to get my testing above 50% mark. 
 
 ### End Point
 
@@ -217,6 +223,13 @@ At the start of the project, I focused on the five tasks most easily completable
 + URL tests were 100% because the application was up and running 
 + Database tests were 100%
 
+<img src="https://i.imgur.com/cq6ZbKK.png" title="source: imgur.com" />
+
++ 12 tests running, 5 database & 7 url.
++ After I added crud, my coverage went down to 52%
+    + This is because there are now more statements in service one that aren't being tested as I haven't implemented selenium. 
++ Remained above 50% as I added more database and url testing
+
 ## Retrospective
 
 ### What Went Well?
@@ -235,13 +248,13 @@ At the start of the project, I focused on the five tasks most easily completable
 
 ### Future Improvements
 
-<img src="https://i.imgur.com/IXwJzan.png" title="sprint for future" /></a>
+<img width="300" src="https://i.imgur.com/MH7lxA1.png" title="source: imgur.com" />
 
-+ CRUD functionality
-+ Selenium
-+ Trying to get coverage above 70%
++ Selenium to get coverage above 70%
 + More theme options for the user
 + Add music to match the theme as another service
++ Front-end design implementation
++ Better back-end coding
 
 
 ## How to run the webapp?
