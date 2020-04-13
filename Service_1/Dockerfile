@@ -3,7 +3,7 @@ FROM python:3.7-alpine
 RUN apk add --update \
   && pip3 install --upgrade pip 
 
-WORKDIR /SFIA2/Service_1/ 
+WORKDIR /Service_1/ 
 
 COPY ./requirements.txt .
 
