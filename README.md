@@ -244,11 +244,49 @@ At the start of the project, I focused on the five tasks most easily completable
 + Add music to match the theme as another service
 
 
-## Installation Guide
+## Guide
 - Requirements:
-    - 2 (preferrably 3) GCP Compute Engine Instances running on Ubuntu 18.04
-    - SSH keys (created using ssh-keygen) and the public key added to each instance in the SSH Keys section of the instances.
-    - Jenkins & Ansible installed in one of the instances. 
+    - Visual Studio Code
+        - Download [here](https://code.visualstudio.com/download)
+    - Git Bash
+        - Download [here](https://gitforwindows.org/)
+    - Google Cloud Platform account (google account)
+        - Create [here](https://accounts.google.com/SignUp?continue=https%3A%2F%2Fwww.google.co.uk%2F&hl=en&gmb=exp&biz=false)
+1. Using your google account, login into Google Cloud Platform
+2. Create 2 (ideally 3) Compute Engine Instances (Ubuntu 18.04): master, manager & worker (for 3) or manager & worker (for 2). 
+3. Create 1 MySQL SQL instance.
+4. Open Git Bash and run the command 'ssh-keygen', this will prompt you to name the key files (I stick to the basic side and call it: id_rsa)
+5. In file-explorer, find id_rsa & id_rsa.pub and put them into a folder called .ssh
+6. Open id_rsa.pub with notepad. Copy and paste all of it into the ssh key part of your compute engine instances. This is how you'll ssh into each instance from one another.
+7. Add a config file on your Visual Studio Code in the format of: 
+'Host manager #name it anything, I called it manager
+   HostName XX.XXX.XX.XX #ip address of the instance you want connected to VSC 
+   User Admin #name of the user you generated the key as
+   IdentityFile ~/.ssh/id_rsa' #path to private key'
+8. Once you've connected to your instances via Visual Studio, clone down the jenkins branch into your manager (and master, if using 3 instances) instance using the command 'git clone -b jenkins https://github.com/thenu97/story_poem_generator.git'. 
+9. Download Jenkins onto manager (if using 3, then only download it onto master). 
+    - Instructions can found [here](https://www.guru99.com/download-install-jenkins.html)
+    - For jenkins, you'll need java jdk. This can be installed by running the following commands:
+        'sudo apt-get update'
+        'sudo apt-get install openjdk-8-jdk'
+        'java -version' #to check the version
+10. Download Ansible onto manager (if using 3, then only download it onto master).
+    - Instructions can found [here](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+11. Now for the security part, to help not expose any credentials:
+    - For SQL database details:
+        - Create a .env file in the same directory of the project. The format:
+            'MYSQL_HOST=XX.XX.XXX.XXX (ip address)
+            MYSQL_USER=
+            MYSQL_PASSWORD=
+            MYSQL_DB='
+    - For ansible inventory.config file:
+        - On the node with jenkins installed in it, run the following commands:
+            'sudo su jenkins' going in as a jenkins user
+            'cd /etc'
+            'sudo vim hosts' 
+        - within the file hosts, under localhost add:
+            'XX.XX.XXX.XXX worker-node' #you can name it anything
+            'XX.XX.XXX.XXX manager-node' #if 3rd VM is used.
 
 
 ## Authors
