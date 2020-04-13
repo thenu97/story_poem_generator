@@ -62,7 +62,7 @@ I decided to create a Story & Poem Generator with a Microservice architecture. M
 
 + After implementing crud, my website looked as below:
 
-<img width="250" src="https://i.imgur.com/2uFXicC.png" title="first page" />  <img src="https://i.imgur.com/OoZ40Zm.png" title="2nd page" />
+<img width="350" src="https://i.imgur.com/2uFXicC.png" title="first page" />  <img width="350" src="https://i.imgur.com/OoZ40Zm.png" title="2nd page" />
 
 ## Asana Board
 
@@ -248,7 +248,7 @@ At the start of the project, I focused on the five tasks most easily completable
 
 ### Future Improvements
 
-<img width="300" src="https://i.imgur.com/MH7lxA1.png" title="source: imgur.com" />
+<img width="500" src="https://i.imgur.com/MH7lxA1.png" title="source: imgur.com" />
 
 + Selenium to get coverage above 70%
 + More theme options for the user
