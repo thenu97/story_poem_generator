@@ -29,26 +29,26 @@ This is for the second project set by QA
 ## Project Brief
 
 To create an app using:
-+ Software Development with Python
-+ CI/CD using Jenkins, Ansible pipeline (Seperate Cloud Services)
++ Back-end coding in Python
++ CI/CD using Jenkins, Ansible pipeline
 + Nginx as reverse proxy
-+ Managed MySQL database on the cloud
-+ Docker and Orchestration using Docker-Swarm, Split app into micro-services in the cloud with built in redundancies such as Load-Balancing behind Nginx. (One Manager node, One Worker Node in Swarm)
-+ Use Ansible to set up all VM's (Installing Dependencies and applications) using Playbook
++ Data presisted by MySQL database
++ Using Docker Swarm to deploy application
++ Use Ansible to set up all VM's (installing dependencies and applications) using playbook
 + Use Jenkins to set up multiple stages in the pipeline; Staging, Testing, Building and Deployment and implement a Git Webhook as a trigger
-+ Implement Cloud Fundamentals such as test driven development, Continuous Integration and deployment, and a SCRUM based methodology
-+ Micro-service oriented architecture composed of at least 4 services that work together and services 2,3,4 should be easily interchangeable using versioning on Dockerhub.
++ Implement Cloud Fundamentals such as test driven development, Continuous Integration and deployment, and an Agile based methodology
++ Micro-service oriented architecture composed of at least 4 services that work together and services 2,3,4 should be easily interchangeable using versioning on Docker Hub.
 
 ### Proposal
 
-I decided to create a Story & Poem Generator with a Microservice architecture. My application will have 4 services not including Jenkins, Managed MYSQL db, Nginx server, Ansible Server and Docker Swarm.
+I decided to create a Story & Poem Generator with a microservice architecture. My application will have 4 services that are monitored for changes via Jenkins-GitHub webhook, data presisted via SQL server, Nginx as a reverse proxy, Ansible as a powerful orchestration tool, and Docker.
 + Service 1 of my project is essentially the front-end where the stories and poems are displayed.
-+ Service 2 and 3 will be services that generate the random theme and character name.
++ Service 2 and 3 will be services that generate the random theme and character names.
 + Service 4 is the back-end that decides between whether the user gets a "story" or a "poem".
 + I will be using Ansible as a way to stage all my environments, prepare them to run my services and deploy the docker swarm.
 + I will use Jenkins to build a testing and deployment pipeline using Jenkinsfile that will be triggered using Git/Github webhook.
 + Nginx will be used as a Reverse Proxy to load balance all my services running on Docker Swarm.
-+ Have full CRUD functionality
++ Full CRUD functionality
 
 ### Wireframes
 
@@ -150,10 +150,12 @@ At the start of the project, I focused on the five tasks most easily completable
 
 <img src="https://i.imgur.com/i3cK01G.jpg" title="deployment process" />
 
-+ Code changed on VSC by developers and pushed up to GitHub
-+ GitHub uses webhooks to initiate build in Jenkins 
-+ Jenkins then goes ahead and tests the installation process and URL locally 
-+ Initiates Ansible to set the environment, assign nodes and deploy swarm
++ stage one: developers change code on Visual Studio (IDE) and push it up to GitHub (version control system). 
++ stage two: github is linked to jenkins via a webhook. Every time a developer commits a code, it automates build on Jenkins. 
+    - for security purposes: port 8080 is only exposed to my home IP address & github IP range.
++ stage three: jenkins first downloads docker and ansible locally, deploys stacks and tests if the urls work. If so, it then takes down the stack, and invokes ansible to set the environment and deploy the swarm onto manager node. 
++ stage four (was not implemented): I wanted to ensure ansible builds the images and pushes it up to Docker Hub before it initiates swarm but that couldn't be added.
++ stage five: as soon as Ansible deploys the stack, it pulls down the image from Docker Hub and runs the containers.
 
 
 ### Toolset
@@ -236,6 +238,7 @@ At the start of the project, I focused on the five tasks most easily completable
 + Completed project within timeframe and most of it being above spec.
 + Involving multiple VMs achieved
 + Ansible and Docker were very interesting tools to learn
++ Managed to add CRUD functionality
 
 ### Issues Encountered
 
