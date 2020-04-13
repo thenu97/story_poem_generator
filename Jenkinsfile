@@ -52,7 +52,7 @@ pipeline{
                 sh 'echo "deploy docker via ansible"'
                 sh 'ansible-playbook -i ./ansible/docker.conf ./ansible/deploy-swarm.yml'
                 sh 'echo "swarm depolyed"'
-                sh 'sleep 20'
+                sh 'sleep 30'
             }
         }
         stage("Testing"){
