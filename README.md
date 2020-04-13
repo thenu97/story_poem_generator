@@ -263,9 +263,8 @@ Requirements:
     Host manager #name it anything, I called it manager
         HostName XX.XXX.XX.XX #ip address of the instance you want connected to VSC 
         User Admin #name of the user you generated the key as
-        IdentityFile ~/.ssh/id_rsa' #path to private key'
-        ```
-8. Once you've connected to your instances via Visual Studio, clone down the jenkins branch into your manager (and master, if using 3 instances) instance using the command ```git clone -b jenkins https://github.com/thenu97/story_poem_generator.git```. 
+        IdentityFile ~/.ssh/id_rsa' #path to private key
+8. Once you've connected to your instances via Visual Studio, clone down the jenkins branch into your manager (and master, if using 3 instances) instance using the command ```git clone -b jenkins https://github.com/thenu97/story_poem_generator.git```
 9. Download Jenkins onto manager (if using 3, then only download it onto master). 
     - Instructions can found [here](https://www.guru99.com/download-install-jenkins.html)
     - For jenkins, you'll need java jdk. This can be installed by running the following commands:
@@ -273,7 +272,6 @@ Requirements:
         sudo apt-get update
         sudo apt-get install openjdk-8-jdk
         java -version #to check the version
-        ```
 10. Download Ansible onto manager (if using 3, then only download it onto master).
     - Instructions can found [here](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 11. Now for the security part, to help not expose any credentials:
@@ -284,19 +282,17 @@ Requirements:
             MYSQL_USER=
             MYSQL_PASSWORD=
             MYSQL_DB=
-            ```
     - For ansible inventory.config file:
         - On the node with jenkins installed in it, run the following commands:
-        ```
+            ```
             sudo su jenkins #going in as a jenkins user
             cd /etc
             sudo vim hosts
-            ```
+
         - within the file hosts, under localhost add:
-        ```
+            ```
             XX.XX.XXX.XXX worker-node #you can name it anything
             XX.XX.XXX.XXX manager-node #if 3rd VM is used.
-            ```
 
 
 ## Authors
