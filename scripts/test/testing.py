@@ -4,7 +4,7 @@ import pytest
 import requests
 from flask import abort, url_for
 
-url = "http://35.246.16.90/"
+url = "http://35.246.33.39/"
 
 ############################################################### testing url ###############################################################
 def test_urlmanager_home():
