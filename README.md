@@ -244,17 +244,26 @@ At the start of the project, I focused on the five tasks most easily completable
 + Add music to match the theme as another service
 
 
-## Guide
-Requirements:
-    - Visual Studio Code
-        - download [here](https://code.visualstudio.com/download)
-    - Git Bash
-        - download [here](https://gitforwindows.org/)
-    - Google Cloud Platform account (google account)
-        - create [here](https://accounts.google.com/SignUp?continue=https%3A%2F%2Fwww.google.co.uk%2F&hl=en&gmb=exp&biz=false)
+## How to run the webapp?
+
+### Requirements:
+- Visual Studio Code
+    - download [here](https://code.visualstudio.com/download)
+- Git Bash
+    - download [here](https://gitforwindows.org/)
+- Google Cloud Platform account (google account)
+    - create [here](https://accounts.google.com/SignUp?continue=https%3A%2F%2Fwww.google.co.uk%2F&hl=en&gmb=exp&biz=false)
+
+### Installation Guide
 1. Using your google account, login into Google Cloud Platform
 2. Create 2 (ideally 3) Compute Engine Instances (Ubuntu 18.04): master, manager & worker (for 3) or manager & worker (for 2). 
+    - Firewalls:
+        - Allow HTTP traffic in all
+        - Port 8080 needs to be opened on manager (and master if 3)
 3. Create 1 MySQL SQL instance.
+    - Firewalls (Connectivity):
+        - Public IP could be 0.0.0.0/0
+        - For more security, I highly recommend adding your home IP address instead.
 4. Open Git Bash and run the command ```ssh-keygen```, this will prompt you to name the key files (I stick to the basic side and call it: id_rsa)
 5. In file-explorer, find id_rsa & id_rsa.pub and put them into a folder called .ssh
 6. Open id_rsa.pub with notepad. Copy and paste all of it into the ssh key part of your compute engine instances. This is how you'll ssh into each instance from one another.
@@ -272,24 +281,39 @@ Requirements:
         sudo apt-get update
         sudo apt-get install openjdk-8-jdk
         java -version #to check the version
+10. Open jenkins by running the ip address on port 8080 on the browser and set up a new pipeline by attaching it to the forked ver of this project on your repo.
+11. You can also get up webhooks between github and jenkins
+    - More info provided [here](https://dzone.com/articles/adding-a-github-webhook-in-your-jenkins-pipeline)
 10. Download Ansible onto manager (if using 3, then only download it onto master).
     - Instructions can found [here](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 11. Now for the security part, to help not expose any credentials:
     - For SQL database details:
-        - Create a .env file in the same directory of the project. The format:
-        ```    
-            MYSQL_HOST=XX.XX.XXX.XXX (ip address)
-            MYSQL_USER=
-            MYSQL_PASSWORD=
-            MYSQL_DB=
-    - For ansible inventory.config file:
+        - Docker-compose:
+            - Create a .env file in the same directory of the project. The format:
+            ```    
+                MYSQL_HOST=XX.XX.XXX.XXX (ip address)
+                MYSQL_USER=
+                MYSQL_PASSWORD=
+                MYSQL_DB=
+        - Tests:
+            - Create a .bashrc within the jenkins server:
+                ```
+                sudo su jenkins
+                cd ~
+                sudo vim .bashrc
+            - Add the following to the .bashrc file:
+                ```
+                export MYSQL_HOST=XX.XX.XXX.XXX (ip address)
+                export MYSQL_USER=
+                export MYSQL_PASSWORD=
+                export MYSQL_DB=
+    - For IP addresses on ansible inventory.config file:
         - On the node with jenkins installed in it, run the following commands:
             ```
             sudo su jenkins #going in as a jenkins user
             cd /etc
             sudo vim hosts
-
-        - within the file hosts, under localhost add:
+        - Within the file hosts, under localhost add:
             ```
             XX.XX.XXX.XXX worker-node #you can name it anything
             XX.XX.XXX.XXX manager-node #if 3rd VM is used.
