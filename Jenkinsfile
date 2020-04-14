@@ -16,7 +16,7 @@ pipeline{
                 sh './scripts/installation.sh'
                 sh 'sudo docker swarm init'
                 sh 'sudo docker stack deploy --compose-file /var/lib/jenkins/workspace/posto/testing-docker-swarm.yml stackdemo'
-                sh 'sleep 15'
+                sh 'sleep 20'
                 sh 'echo "checking URLs"'
                 sh './scripts/run_before.sh'
                 sh 'sudo docker stack rm service stackdemo'
